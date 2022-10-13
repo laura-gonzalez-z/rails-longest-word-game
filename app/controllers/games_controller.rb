@@ -1,6 +1,7 @@
 require 'open-uri'
 require 'json'
 
+# Service for the Games controller
 class GamesController < ApplicationController
   def new
     @letters = (('A'..'Z').to_a * 30).sample(10)
@@ -27,7 +28,7 @@ class GamesController < ApplicationController
   end
 
   def english_word?(word)
-    response = URI.open("https://wagon-dictionary.herokuapp.com/#{word}")
+    response = URI.open("https://wagon-dictionary.herokuapp.com/#{word.strip.downcase}")
     json = JSON.parse(response.read)
     json['found']
   end
